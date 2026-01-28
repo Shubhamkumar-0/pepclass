@@ -1,4 +1,4 @@
-name: CI pipeline
+name: Python CI
 
 on:
   push:
@@ -22,20 +22,20 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          python -m pip install -r requirements.txt
 
       - name: Run tests
         run: |
-          python -m pytest
+          pytest
 
       - name: Build Artifact
         run: |
           mkdir build
           cp app1.py requirements.txt build/
-          tar -czf app.tar.gz build/
+          tar -czf app1.tar.gz build/
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-artifact
-          path: app.tar.gz
+          name: app1-artifact
+          path: app1.tar.gz
